@@ -1,5 +1,5 @@
 import './App.css';
-import FormLogin from './components/FormLogin/index';
+import FormLogin from './components/LoginForm/index';
 
 import { Container, Typography } from '@material-ui/core'
 function App() {
@@ -20,6 +20,13 @@ function handleOnSubmit(dados) {
 function handleValidadeCpf(cpf) {
   if(cpf.length !== 11) {
     return {valido: false, texto: "CPF deve ter 11 dígitos" }
+  }
+  return {valido: true}
+}
+
+function handleValidadeCep(cep) {
+  if(cep.length !== 8) {
+    return {valido: false, texto: "Cep deve ter 8 dígitos"}
   }
   return {valido: true}
 }
