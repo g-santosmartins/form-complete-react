@@ -1,11 +1,30 @@
-import React, { } from 'react';
+import React, {useState } from 'react';
 
 import { TextField, Button } from '@material-ui/core';
 
-export default function UserForm() {
+export default function UserForm({ submitProp }) {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  //passing on the state 
+  function handleOnSubmit(e) {
+    e.preventDefault()
+    console.log({email, password})
+
+    submitProp({email, password})
+  }
+
+  function handleOnChange(newState, e) {
+    newState(e.target.value)
+  }
+
   return (
-    <form>
+    <form onSubmit={(e) => { handleOnSubmit(e) }}>
       <TextField
+      onChange={(e)=> handleOnChange(setEmail ,e)}
+        required
+        value={email}
         id="email"
         label="Email"
         type="email"
@@ -14,6 +33,9 @@ export default function UserForm() {
         margin="normal"
       />
       <TextField
+      onChange={(e)=> handleOnChange(setPassword, e )}
+        required
+        value={password}
         id="password"
         label="Senha"
         type="password"
@@ -25,9 +47,9 @@ export default function UserForm() {
       <Button
         variant="contained"
         color="primary"
-
+        type="submit"
       >
-        Finalizar Cadastro
+        Próximo
       </Button>
     </form>
   )

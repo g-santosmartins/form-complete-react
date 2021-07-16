@@ -9,33 +9,19 @@ import { Typography } from '@material-ui/core'
 export default function LoginForm({ submitProp, validateCpfProp }) {
 const [currentStage, SetCurrentStage] = useState(0)
 
+const forms = [
+<PersonalForm submitProp={handleChangeStage} validateCpfProp={validateCpfProp} />,
+<UserForm submitProp={handleChangeStage}  />,
+<DeliveryForm submitProp={submitProp} />]
 
-function handleChangeForm(stage, submitProp, validateCpfProp) {
-  switch (stage) {
-    case 0:
-      return <PersonalForm submitProp={submitProp} validateCpfProp={validateCpfProp} />
-
-    case 1:
-      return <UserForm />
-
-    case 2:
-      return <DeliveryForm />
-
-    default:
-      return <Typography
-        variant="h5"
-        component="h1"
-        align="center"
-        color="error"
-      >
-        Erro: Nenhum formulário a renderizar
-      </Typography>
-  }
+function handleChangeStage() {
+  SetCurrentStage(currentStage + 1)
 }
+
 
   return (
     <>
-      {handleChangeForm(currentStage, submitProp, validateCpfProp)}
+      {forms[currentStage]}
     </>
   )
 }

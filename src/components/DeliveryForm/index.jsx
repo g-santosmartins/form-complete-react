@@ -1,9 +1,14 @@
 import React, {  } from 'react';
 import {TextField, Button} from '@material-ui/core'
 
-export default function DeliveryForm() {
+export default function DeliveryForm({submitProp}) {
+  function handleOnSubmit(e) {
+    e.preventDefault()
+    submitProp()
+  }
+
   return(
-    <form action="">
+    <form onSubmit={(e) => {handleOnSubmit(e)}}>
         <TextField
         id="cep"
         label="CEP"
@@ -48,6 +53,7 @@ export default function DeliveryForm() {
       variant="contained"
       color="primary"
       fullWidth
+      type="submit"
 
       >Finalizar Cadastro
       </Button>

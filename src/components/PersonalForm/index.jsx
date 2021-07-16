@@ -16,9 +16,20 @@ export default function PersonalForm({ submitProp, validateCpfProp }) {
     }
   })
 
+  function localValidationCpf() {
+    if (cpf.length !== 11) {
+      handleOnBlurCPF(cpf)
+      return true
+    }
+    return false
+  }
 
   function handleFormDataGrip(e) {
     e.preventDefault()
+    if (localValidationCpf()) {
+      alert('CPF inválido, tente novamente')
+      return
+    }
 
     const obj = {
       name: name,
@@ -28,12 +39,29 @@ export default function PersonalForm({ submitProp, validateCpfProp }) {
       news: news,
     }
 
+    console.log(obj)
     submitProp(obj)
+
+  }
+
+
+  function onChanceCpf(e) {
+    let temporaryText = e.target.value
+    
+    if (temporaryText === '') {
+      setErrors({
+        cpf: {
+          valido: true,
+          texto: ''
+        }
+      })
+    }
   }
 
   function handleOnChangeText(e, newState) {
-    let temporaryName = e.target.value
-    newState(temporaryName)
+
+    let temporaryText = e.target.value
+    newState(temporaryText)
   }
 
   function handleOnChangeSwitch(e, newState) {
@@ -52,6 +80,7 @@ export default function PersonalForm({ submitProp, validateCpfProp }) {
       onSubmit={(e) => { handleFormDataGrip(e) }}
     >
       <TextField
+        required
         value={name}
         onChange={(e) => {
           handleOnChangeText(e, setName)
@@ -64,6 +93,8 @@ export default function PersonalForm({ submitProp, validateCpfProp }) {
       />
 
       <TextField
+        required
+
         fullWidth
         value={nickname}
         onChange={(e) => { handleOnChangeText(e, setNickname) }}
@@ -73,8 +104,9 @@ export default function PersonalForm({ submitProp, validateCpfProp }) {
         margin="normal" />
 
       <TextField
+        required
         value={cpf}
-        onBlur={handleOnBlurCPF }
+        onBlur={handleOnBlurCPF, onChanceCpf}
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
         onChange={(e) => { handleOnChangeText(e, setCpf) }}
