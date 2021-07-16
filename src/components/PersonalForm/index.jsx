@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core'
 
 
-export default function FormLogin({ submitProp, validateCpfProp }) {
+export default function PersonalForm({ submitProp, validateCpfProp }) {
 
   const [name, setName] = useState('')
   const [nickname, setNickname] = useState('')
