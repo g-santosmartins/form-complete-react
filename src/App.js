@@ -9,7 +9,7 @@ function App() {
   return (
     <Container component="article" maxWidth="sm">
       <BaseForm
-        validations={{ cpf: handleValidateCpf, senha: handleValidatePassword }}
+        validations={{ cpf: handleValidateCpf, password: handleValidatePassword, name: handleValidatePassword }}
       />
     </Container>
   );

@@ -12,14 +12,20 @@ export default function PersonalForm({submitProp, validations }) {
     cpf: {
       valido: true,
       texto: ""
+    },
+    name: {
+      valido: true,
+      texto: ""
     }
   })
 
   // model functions
 
-  function handleValidateCpfonSubmit() {
-    if(cpf.length !== 11) {
-      return false
+  function handleValidateBeforeOnSubmit() {
+    for(let field in errors) {
+      if(!errors[field].valido) {
+        return false
+      }
     }
     return true
   }
@@ -35,16 +41,14 @@ export default function PersonalForm({submitProp, validations }) {
 
   function handleFormDataGrip(e) {
     e.preventDefault()
-    if(!handleValidateCpfonSubmit()) {
-      alert("O cpf deve conter 11 dígitos")
+    if(handleValidateBeforeOnSubmit()) {
+      submitProp({name, nickname, cpf, sales, news})
       return
     }
-    submitProp({name, nickname, cpf, sales, news})
-
+    alert('Insira um CPF válido')
   }
 
   function handleOnChangeText(e, newState) {
-
     const temporaryText = e.target.value
     newState(temporaryText)
   }
@@ -60,6 +64,10 @@ export default function PersonalForm({submitProp, validations }) {
       <TextField
         required
         value={name}
+
+        onBlur={(e) => {validateInput(e)}}
+        error={!errors.name.valido}
+        helperText={errors.name.texto}
         onChange={(e) => {
           handleOnChangeText(e, setName)
         }}

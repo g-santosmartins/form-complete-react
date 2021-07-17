@@ -3,6 +3,7 @@ import './styles.css'
 
 export default function Modal({ textModal }) {
   const [open, setOpen] = useState(false)
+  console.log(open)
   
   function handleCloseModal(open) {
     const elementModal = document.getElementById("myModal");

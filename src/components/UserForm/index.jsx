@@ -1,17 +1,44 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 
 import { TextField, Button } from '@material-ui/core';
 
-export default function UserForm({ submitProp, captureData }) {
+export default function UserForm({ submitProp, validations }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({
+    password: {
+      valido: true,
+      texto: ""
+    }
+  })
 
-  //passing on the state 
+  // model function 
+
+  function handleValidateBeforeOnSubmit() {
+    for (let field in errors) {
+      if (!errors[field].valido) {
+        return false
+      }
+    }
+    return true
+  }
+
+  function validateInput(e) {
+    const { name, value } = e.target
+    const newState = { ...errors }
+    newState[name] = validations[name](value)
+    setErrors(newState)
+  }
+
+  // layout functions
   function handleOnSubmit(e) {
     e.preventDefault()
-
-    submitProp({email, password})
+    if (handleValidateBeforeOnSubmit()) {
+      submitProp({ email, password })
+      return
+    }
+    alert('Insira uma senha válida!')
   }
 
   function handleOnChange(newState, e) {
@@ -21,7 +48,7 @@ export default function UserForm({ submitProp, captureData }) {
   return (
     <form onSubmit={(e) => { handleOnSubmit(e) }}>
       <TextField
-      onChange={(e)=> handleOnChange(setEmail ,e)}
+        onChange={(e) => handleOnChange(setEmail, e)}
         required
         value={email}
         id="email"
@@ -32,10 +59,14 @@ export default function UserForm({ submitProp, captureData }) {
         margin="normal"
       />
       <TextField
-      onChange={(e)=> handleOnChange(setPassword, e )}
+        onChange={(e) => handleOnChange(setPassword, e)}
+        onBlur={validateInput}
+        error={!errors.password.valido}
+        helperText={errors.password.texto}
         required
         value={password}
         id="password"
+        name="password"
         label="Senha"
         type="password"
         variant="outlined"
