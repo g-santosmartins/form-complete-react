@@ -43,20 +43,6 @@ export default function PersonalForm({submitProp, validateCpfProp }) {
 
   }
 
-
-  function onChanceCpf(e) {
-    let temporaryText = e.target.value
-    
-    if (temporaryText === '') {
-      setErrors({
-        cpf: {
-          valido: true,
-          texto: ''
-        }
-      })
-    }
-  }
-
   function handleOnChangeText(e, newState) {
 
     let temporaryText = e.target.value
@@ -105,7 +91,7 @@ export default function PersonalForm({submitProp, validateCpfProp }) {
       <TextField
         required
         value={cpf}
-        onBlur={handleOnBlurCPF, onChanceCpf}
+        onBlur={handleOnBlurCPF}
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
         onChange={(e) => { handleOnChangeText(e, setCpf) }}

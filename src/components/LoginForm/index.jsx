@@ -7,21 +7,27 @@ import  Modal  from '../Modal/index';
 
 
 export default function LoginForm({ validateCpfProp }) {
-  const [currentStage, setCurrentStage] = useState(3)
+  const [currentStage, setCurrentStage] = useState(0)
   const [collectedData, setCollectedData] = useState({})
-
-
-  useEffect(() => {
-    console.log(collectedData)
-  })
-
   const forms = [
+
     <PersonalForm submitProp={handleCollectDataFromForms} validateCpfProp={validateCpfProp} />,
     <UserForm submitProp={handleCollectDataFromForms} />,
     <DeliveryForm submitProp={handleCollectDataFromForms} />,
+    <Modal textModal={'Cadastro realizado com sucesso'}/>
+
   
-    <Modal textModal={"Texto aqui"}/>
   ]
+
+
+
+  useEffect(() => {
+    if(currentStage === 3){
+      console.log(collectedData)
+
+    }
+  })
+
 
   function handleCollectDataFromForms(data) {
     setCollectedData({ ...collectedData, ...data })

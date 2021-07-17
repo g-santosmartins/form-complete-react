@@ -1,7 +1,5 @@
 import React, { useState,  } from 'react'
 import './styles.css'
-import { Button  } from '@material-ui/core'
-
 
 export default function Modal({ textModal }) {
 
@@ -10,14 +8,14 @@ export default function Modal({ textModal }) {
 
 
   
-  function handleShowModal() {
-    if (open === false) {
-      const elementModal = document.getElementById("myModal");
-      elementModal.style.display = "block"
-      setOpen(true);
-    }
+  // function handleShowModal() {
+  //   if (open === false) {
+  //     const elementModal = document.getElementById("myModal");
+  //     elementModal.style.display = "block"
+  //     setOpen(true);
+  //   }
 
-  }
+  // }
   function handleCloseModal() {
     const elementModal = document.getElementById("myModal");
     elementModal.style.display = "none";
@@ -28,9 +26,8 @@ export default function Modal({ textModal }) {
 
     <>
   
-      <Button onClick={handleShowModal}>Open Modal</Button>
-
-
+      {/* <Button onClick={handleShowModal}>Open Modal</Button> */}
+      
       <div id="myModal" class="modal">
 
         <div class="modal-content">
