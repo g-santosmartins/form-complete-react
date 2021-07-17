@@ -15,6 +15,14 @@ export default function PersonalForm({submitProp, validations }) {
     }
   })
 
+  // model functions
+
+  function handleValidateCpfonSubmit() {
+    if(cpf.length !== 11) {
+      return false
+    }
+    return true
+  }
 
   function validateInput(e) {
     const {name, value} = e.target
@@ -27,6 +35,10 @@ export default function PersonalForm({submitProp, validations }) {
 
   function handleFormDataGrip(e) {
     e.preventDefault()
+    if(!handleValidateCpfonSubmit()) {
+      alert("O cpf deve conter 11 dígitos")
+      return
+    }
     submitProp({name, nickname, cpf, sales, news})
 
   }
