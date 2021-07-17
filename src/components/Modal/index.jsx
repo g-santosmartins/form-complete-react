@@ -2,11 +2,7 @@ import React, { useState,  } from 'react'
 import './styles.css'
 
 export default function Modal({ textModal }) {
-
- 
   const [open, setOpen] = useState(false)
-
-
   
   // function handleShowModal() {
   //   if (open === false) {
@@ -16,28 +12,25 @@ export default function Modal({ textModal }) {
   //   }
 
   // }
-  function handleCloseModal() {
+  function handleCloseModal(open) {
     const elementModal = document.getElementById("myModal");
     elementModal.style.display = "none";
     setOpen(false)
+    window.location.reload()
   }
 
   return (
 
     <>
-  
-      {/* <Button onClick={handleShowModal}>Open Modal</Button> */}
-      
       <div id="myModal" class="modal">
+      
 
         <div class="modal-content">
-          <span onClick={handleCloseModal} class="close">&times;</span>
+          <div><span onClick={handleCloseModal} class="close">&times;</span></div>
           <p>{textModal}</p>
-
         </div>
 
       </div>
-
     </>
   )
 
