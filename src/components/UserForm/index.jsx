@@ -10,10 +10,8 @@ export default function UserForm({ submitProp, captureData }) {
   //passing on the state 
   function handleOnSubmit(e) {
     e.preventDefault()
-    console.log({email, password})
 
-    captureData({email, password})
-    submitProp()
+    submitProp({email, password})
   }
 
   function handleOnChange(newState, e) {

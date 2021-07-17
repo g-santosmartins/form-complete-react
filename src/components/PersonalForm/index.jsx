@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core'
 
 
-export default function PersonalForm({submitProp, captureData, validateCpfProp }) {
+export default function PersonalForm({submitProp, validateCpfProp }) {
 
   const [name, setName] = useState('')
   const [nickname, setNickname] = useState('')
@@ -31,16 +31,15 @@ export default function PersonalForm({submitProp, captureData, validateCpfProp }
       return
     }
 
-    const obj = {
-      name: name,
-      nickname: nickname,
-      cpf: cpf,
-      sales: sales,
-      news: news,
-    }
+    // const obj = {
+    //   name: name,
+    //   nickname: nickname,
+    //   cpf: cpf,
+    //   sales: sales,
+    //   news: news,
+    // }
 
-    captureData(obj)
-    submitProp()
+    submitProp({name, nickname, cpf, sales, news})
 
   }
 
@@ -106,7 +105,7 @@ export default function PersonalForm({submitProp, captureData, validateCpfProp }
       <TextField
         required
         value={cpf}
-        onBlur={{handleOnBlurCPF, onChanceCpf}}
+        onBlur={handleOnBlurCPF, onChanceCpf}
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
         onChange={(e) => { handleOnChangeText(e, setCpf) }}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core'
 
-export default function DeliveryForm({ captureData }) {
+export default function DeliveryForm({ submitProp }) {
 
   const [cep, setCep] = useState("")
   const [address, setAddress] = useState("")
@@ -16,7 +16,7 @@ export default function DeliveryForm({ captureData }) {
 
   function handleOnSubmit(e) {
     e.preventDefault()
-    captureData({cep, address, number, state, city})
+    submitProp({cep, address, number, state, city})
   }
 
   return (
