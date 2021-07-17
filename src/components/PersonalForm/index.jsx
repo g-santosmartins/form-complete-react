@@ -1,64 +1,45 @@
 import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core'
 
-
-export default function PersonalForm({submitProp, validateCpfProp }) {
+export default function PersonalForm({submitProp, validations }) {
 
   const [name, setName] = useState('')
   const [nickname, setNickname] = useState('')
   const [cpf, setCpf] = useState('')
   const [sales, setSales] = useState(true)
   const [news, setNews] = useState(false)
-  const [erros, setErrors] = useState({
+  const [errors, setErrors] = useState({
     cpf: {
       valido: true,
       texto: ""
     }
   })
 
-  function localValidationCpf() {
-    if (cpf.length !== 11) {
-      handleOnBlurCPF(cpf)
-      return true
-    }
-    return false
+
+  function validateInput(e) {
+    const {name, value} = e.target
+    const newState = {...errors}
+    newState[name] = validations[name](value)
+    setErrors(newState )
   }
+
+  // interface functions
 
   function handleFormDataGrip(e) {
     e.preventDefault()
-    if (localValidationCpf()) {
-      alert('CPF inválido, tente novamente')
-      return
-    }
-
-    // const obj = {
-    //   name: name,
-    //   nickname: nickname,
-    //   cpf: cpf,
-    //   sales: sales,
-    //   news: news,
-    // }
-
     submitProp({name, nickname, cpf, sales, news})
 
   }
 
   function handleOnChangeText(e, newState) {
 
-    let temporaryText = e.target.value
+    const temporaryText = e.target.value
     newState(temporaryText)
   }
 
   function handleOnChangeSwitch(e, newState) {
-    setSales(e.target.checked)
+    newState(e.target.checked)
   }
-
-  function handleOnBlurCPF() {
-    const isValid = validateCpfProp(cpf)
-    setErrors({ cpf: isValid })
-
-  }
-
 
   return (
     <form
@@ -91,13 +72,13 @@ export default function PersonalForm({submitProp, validateCpfProp }) {
       <TextField
         required
         value={cpf}
-        onBlur={handleOnBlurCPF}
-        error={!erros.cpf.valido}
-        helperText={erros.cpf.texto}
+        onBlur={(e) => {validateInput(e)}}
+        error={!errors.cpf.valido}
+        helperText={errors.cpf.texto}
         onChange={(e) => { handleOnChangeText(e, setCpf) }}
         fullWidth
         label="CPF"
-        name="CPF"
+        name="cpf"
         variant="outlined"
         margin="normal"
       />

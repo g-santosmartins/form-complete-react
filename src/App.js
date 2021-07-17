@@ -1,5 +1,5 @@
 import './App.css';
-import handleValidadeCpf from './services/validateCpf'
+import { handleValidateCpf, handleValidatePassword } from './models/validations'
 
 import BaseForm from './components/BaseForm/index';
 
@@ -8,7 +8,9 @@ import { Container } from '@material-ui/core'
 function App() {
   return (
     <Container component="article" maxWidth="sm">
-      <BaseForm validateCpfProp={handleValidadeCpf} />
+      <BaseForm
+        validations={{ cpf: handleValidateCpf, senha: handleValidatePassword }}
+      />
     </Container>
   );
 }
