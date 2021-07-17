@@ -3,20 +3,24 @@ import PersonalForm from '../PersonalForm/index'
 import DeliveryForm from '../DeliveryForm/index'
 
 import UserForm from '../UserForm/index'
-import { Typography } from '@material-ui/core'
 
 
-export default function LoginForm({ submitProp, validateCpfProp }) {
+export default function LoginForm({validateCpfProp }) {
 const [currentStage, SetCurrentStage] = useState(0)
 
 const forms = [
-<PersonalForm submitProp={handleChangeStage} validateCpfProp={validateCpfProp} />,
-<UserForm submitProp={handleChangeStage}  />,
-<DeliveryForm submitProp={submitProp} />]
+<PersonalForm submitProp={handleChangeStage} captureData={handleOnSubmit} validateCpfProp={validateCpfProp}/>,
+<UserForm submitProp={handleChangeStage}  captureData={handleOnSubmit} />,
+<DeliveryForm captureData={handleOnSubmit} />]
 
 function handleChangeStage() {
   SetCurrentStage(currentStage + 1)
 }
+function handleOnSubmit(dados) {
+  console.log(dados)
+}
+
+
 
 
   return (

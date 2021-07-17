@@ -2,7 +2,7 @@ import React, {useState } from 'react';
 
 import { TextField, Button } from '@material-ui/core';
 
-export default function UserForm({ submitProp }) {
+export default function UserForm({ submitProp, captureData }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -12,7 +12,8 @@ export default function UserForm({ submitProp }) {
     e.preventDefault()
     console.log({email, password})
 
-    submitProp({email, password})
+    captureData({email, password})
+    submitProp()
   }
 
   function handleOnChange(newState, e) {
