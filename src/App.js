@@ -13,11 +13,7 @@ function App() {
   return (
     <Container component="article" maxWidth="sm">
       <RegisterValidation.Provider
-        value={{
-          cpf: handleValidateCpf,
-          password: handleValidatePassword,
-          name: handleValidatePassword
-        }}>
+        value={}>
         <BaseForm /> 
       </RegisterValidation.Provider>
     </Container>
