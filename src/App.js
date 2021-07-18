@@ -1,21 +1,14 @@
 import './App.css';
-import { Container } from '@material-ui/core'
-
+import { handleValidateCpf, handleValidatePassword } from './models/validations'
 
 import BaseForm from './components/BaseForm/index';
 
-import RegisterValidation from './context/RegisterValidations'
-import { handleValidateCpf, handleValidatePassword } from './models/validations'
-
-
+import { Container } from '@material-ui/core'
 
 function App() {
   return (
     <Container component="article" maxWidth="sm">
-      <RegisterValidation.Provider
-        value={}>
-        <BaseForm /> 
-      </RegisterValidation.Provider>
+      <BaseForm/>
     </Container>
   );
 }

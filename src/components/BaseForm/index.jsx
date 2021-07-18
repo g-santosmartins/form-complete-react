@@ -7,14 +7,14 @@ import Modal from '../Modal/index';
 import { Stepper, Step, StepLabel, Container } from '@material-ui/core'
 
 
-export default function LoginForm() {
+export default function LoginForm({ validations }) {
   const [currentStage, setCurrentStage] = useState(0)
   const [collectedData, setCollectedData] = useState({})
   
   const forms = [
-    <UserForm submitProp={handleCollectDataFromForms}  />,
-    <PersonalForm submitProp={handleCollectDataFromForms} />,
-    <DeliveryForm submitProp={handleCollectDataFromForms} />,
+    <UserForm submitProp={handleCollectDataFromForms} validations={validations} />,
+    <PersonalForm submitProp={handleCollectDataFromForms} validations={validations} />,
+    <DeliveryForm submitProp={handleCollectDataFromForms} validations={validations} />,
     <Modal textModal={'Cadastro realizado com sucesso'} />
   ]
 
