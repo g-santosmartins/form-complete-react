@@ -1,16 +1,25 @@
 import './App.css';
-import { handleValidateCpf, handleValidatePassword } from './models/validations'
+import { Container } from '@material-ui/core'
+
 
 import BaseForm from './components/BaseForm/index';
 
-import { Container } from '@material-ui/core'
+import RegisterValidation from './context/RegisterValidations'
+import { handleValidateCpf, handleValidatePassword } from './models/validations'
+
+
 
 function App() {
   return (
     <Container component="article" maxWidth="sm">
-      <BaseForm
-        validations={{ cpf: handleValidateCpf, password: handleValidatePassword, name: handleValidatePassword }}
-      />
+      <RegisterValidation.Provider
+        value={{
+          cpf: handleValidateCpf,
+          password: handleValidatePassword,
+          name: handleValidatePassword
+        }}>
+        <BaseForm /> 
+      </RegisterValidation.Provider>
     </Container>
   );
 }
