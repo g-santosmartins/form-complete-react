@@ -1,40 +1,18 @@
 import React, { useState, useContext } from 'react';
-
 import { TextField, Button } from '@material-ui/core';
 
 import RegisterValidations from '../../context/RegisterValidations';
+import useErrors from '../../hooks/useErrors'
+// import {axiosInstance, getData} from '../../api/apiLocations'
 
-export default function UserForm({ submitProp }) {
+export default function UserForm({ submitProp }, Component) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errors, setErrors] = useState({
-    password: {
-      valido: true,
-      texto: ""
-    }
-  })
-
+  
   // context
   const validations = useContext(RegisterValidations)
-
-  // model function 
-
-  function handleValidateBeforeOnSubmit() {
-    for (let field in errors) {
-      if (!errors[field].valido) {
-        return false
-      }
-    }
-    return true
-  }
-
-  function validateInput(e) {
-    const { name, value } = e.target
-    const newState = { ...errors }
-    newState[name] = validations[name](value)
-    setErrors(newState)
-  }
+  const [errors, validateInput, handleValidateBeforeOnSubmit] = useErrors(validations)
 
   // layout functions
   function handleOnSubmit(e) {

@@ -17,8 +17,6 @@ function App() {
 
       </RegisterValidations.Provider>
 
-      {/* Sem provider com comportamento default definido na f() noValidation */}
-      <BaseForm />
     </Container>
   );
 }

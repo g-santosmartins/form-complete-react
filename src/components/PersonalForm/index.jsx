@@ -3,6 +3,7 @@ import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core'
 import { useContext } from 'react';
 
 import RegisterValidations from '../../context/RegisterValidations'
+import useErrors from '../../hooks/useErrors'
 
 export default function PersonalForm({submitProp }) {
 
@@ -11,20 +12,10 @@ export default function PersonalForm({submitProp }) {
   const [cpf, setCpf] = useState('')
   const [sales, setSales] = useState(true)
   const [news, setNews] = useState(false)
-  const [errors, setErrors] = useState({
-    cpf: {
-      valido: true,
-      texto: ""
-    },
-    name: {
-      valido: true,
-      texto: ""
-    }
-  })
 
   // context use:
   const validations = useContext(RegisterValidations)
-
+  const [errors, validateInput] = useErrors(validations)
   // model functions
 
   function handleValidateBeforeOnSubmit() {
@@ -36,13 +27,7 @@ export default function PersonalForm({submitProp }) {
     return true
   }
 
-  function validateInput(e) {
-    const {name, value} = e.target
-    const newState = {...errors}
-    newState[name] = validations[name](value)
-    setErrors(newState )
-  }
-
+  
   // interface functions
 
   function handleFormDataGrip(e) {
