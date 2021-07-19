@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { TextField, Button } from '@material-ui/core';
 
-export default function UserForm({ submitProp, validations }) {
+import RegisterValidations from '../../context/RegisterValidations';
+
+export default function UserForm({ submitProp }) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -12,6 +14,9 @@ export default function UserForm({ submitProp, validations }) {
       texto: ""
     }
   })
+
+  // context
+  const validations = useContext(RegisterValidations)
 
   // model function 
 

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core'
+import { useContext } from 'react';
 
-export default function PersonalForm({submitProp, validations }) {
+import RegisterValidations from '../../context/RegisterValidations'
+
+export default function PersonalForm({submitProp }) {
 
   const [name, setName] = useState('')
   const [nickname, setNickname] = useState('')
@@ -18,6 +21,9 @@ export default function PersonalForm({submitProp, validations }) {
       texto: ""
     }
   })
+
+  // context use:
+  const validations = useContext(RegisterValidations)
 
   // model functions
 

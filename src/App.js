@@ -3,15 +3,22 @@ import { handleValidateCpf, handleValidatePassword } from './models/validations'
 import "fontsource-roboto";
 import BaseForm from './components/BaseForm/index';
 
+import RegisterValidations from './context/RegisterValidations'
+
 import { Container } from '@material-ui/core'
 
 function App() {
   return (
     <Container component="article" maxWidth="sm">
-    
-      <BaseForm
-        validations={{ cpf: handleValidateCpf, password: handleValidatePassword, name: handleValidatePassword }}
-      />
+      <RegisterValidations.Provider
+        value={{ cpf: handleValidateCpf, password: handleValidatePassword, name: handleValidatePassword }}
+      >
+        <BaseForm />
+
+      </RegisterValidations.Provider>
+
+      {/* Sem provider com comportamento default definido na f() noValidation */}
+      <BaseForm />
     </Container>
   );
 }
